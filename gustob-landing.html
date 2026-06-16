@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gustob - Experiencia Gastronómica Exclusiva</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --negro-profundo: #0B0B0B;
+            --blanco-nieve: #FFFFFF;
+            --dorado-premium: #D4AF37;
+            --dorado-oscuro: #C5A059;
+            --carbón: #1a1a1a;
+            --gris-claro: #f5f5f5;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--negro-profundo);
+            color: var(--blanco-nieve);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ========== HEADER / NAVBAR ========== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(11, 11, 11, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--dorado-premium);
+            text-transform: uppercase;
+        }
+
+        nav a {
+            color: var(--blanco-nieve);
+            margin-left: 2rem;
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: var(--dorado-premium);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(11, 11, 11, 0.7) 0%, rgba(11, 11, 11, 0.9) 100%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" seed="2"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="80"/></filter></defs><rect width="1200" height="800" fill="%23000000" opacity="0.5"/><ellipse cx="600" cy="300" rx="400" ry="300" fill="none" stroke="%23D4AF37" opacity="0.15" stroke-width="2" filter="url(%23noise)"/><path d="M 300 400 Q 600 200 900 400" stroke="%23D4AF37" opacity="0.1" stroke-width="1"/></svg>');
+            background-size: cover, 1200px 800px;
+            background-position: center, center;
+            background-repeat: no-repeat, repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--dorado-premium);
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .hero p {
+            font-family: 'Lato', sans-serif;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: var(--blanco-nieve);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background-color: var(--dorado-premium);
+            color: var(--negro-profundo);
+            text-decoration: none;
+            border: 2px solid var(--dorado-premium);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--dorado-premium);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ========== SCROLL INDICATOR ========== */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--dorado-premium);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* ========== SECCIÓN DE IDENTIDAD ========== */
+        .seccion {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .seccion-titulo {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--dorado-premium);
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .identidad-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .identidad-card {
+            background: linear-gradient(135deg, var(--carbón) 0%, rgba(26, 26, 26, 0.5) 100%);
+            padding: 2.5rem;
+            border-left: 3px solid var(--dorado-premium);
+            border-radius: 8px;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .identidad-card.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .identidad-card:hover {
+            border-left: 3px solid var(--dorado-premium);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.15);
+            transform: translateY(-8px);
+        }
+
+        .identidad-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--dorado-premium);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .identidad-card p {
+            color: var(--gris-claro);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* ========== MANIFIESTO ========== */
+        .manifiesto {
+            background: linear-gradient(135deg, var(--carbón) 0%, rgba(26, 26, 26, 0.7) 100%);
+            padding: 5rem 2rem;
+            margin: 4rem auto;
+            max-width: 1000px;
+            border: 1px solid var(--dorado-premium);
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .manifiesto::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .manifiesto-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .manifiesto h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--dorado-premium);
+            margin-bottom: 2rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .manifiesto p {
+            font-size: 1.1rem;
+            color: var(--blanco-nieve);
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        /* ========== MENÚ ========== */
+        .menu {
+            padding: 6rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .menu-categoria {
+            margin-bottom: 4rem;
+        }
+
+        .menu-categoria h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--dorado-premium);
+            margin-bottom: 2rem;
+            text-align: center;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--dorado-premium);
+            padding-bottom: 1rem;
+        }
+
+        .plato {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            border-left: 3px solid var(--dorado-premium);
+            background: rgba(26, 26, 26, 0.5);
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .plato.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .plato:hover {
+            background: rgba(26, 26, 26, 0.8);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
+            transform: translateX(10px);
+        }
+
+        .plato-nombre {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--dorado-premium);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .plato-precio {
+            font-size: 1.1rem;
+            color: var(--dorado-premium);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .plato-descripcion {
+            color: var(--gris-claro);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--carbón);
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--dorado-premium);
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .footer-seccion h4 {
+            color: var(--dorado-premium);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .footer-seccion p {
+            color: var(--gris-claro);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--gris-claro);
+            font-size: 0.9rem;
+        }
+
+        /* ========== BOTÓN FLOTANTE WHATSAPP ========== */
+        .whatsapp-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--dorado-premium);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-fab:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
+            background-color: var(--dorado-oscuro);
+        }
+
+        .whatsapp-fab svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--blanco-nieve);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin-left: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                padding: 5rem 1rem 1rem;
+            }
+
+            .seccion {
+                padding: 4rem 1rem;
+            }
+
+            .identidad-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .manifiesto {
+                padding: 3rem 1.5rem;
+                margin: 3rem 1rem;
+            }
+
+            .menu {
+                padding: 4rem 1rem;
+            }
+
+            .whatsapp-fab {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .whatsapp-fab svg {
+                width: 25px;
+                height: 25px;
+            }
+
+            nav {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .seccion-titulo {
+                font-size: 1.8rem;
+            }
+
+            .manifiesto h2 {
+                font-size: 1.8rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .whatsapp-fab {
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== SCROLL REVEAL ========== */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .scroll-reveal.reveal {
+            animation: revealUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes revealUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Efecto parallax suave */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">Gustob</div>
+    <nav>
+        <a href="#identidad">Identidad</a>
+        <a href="#manifiesto">Concepto</a>
+        <a href="#menu">Menú</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Por un gusto inolvidable.</h1>
+        <p>Donde la magia del cine y la alta gastronomía convergen en tu plato.</p>
+        <a href="https://wa.me/56966352252" class="btn-primary">Reserva tu Experiencia</a>
+    </div>
+    <div class="scroll-indicator">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.48-1.45-2.63-2.77-2.63-5.02 0-2.18 1.49-4.05 4.32-4.05s4.32 1.87 4.32 4.05c0 2.25-1.15 3.57-2.63 5.02 1.07 1.66 2.44 3.78 2.44 5.52 0 .5-.45.9-.99.9s-.99-.4-.99-.9c0-1.40-1.30-3.47-3.12-5.52zM12 6c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"/>
+        </svg>
+    </div>
+</section>
+
+<!-- IDENTIDAD SECTION -->
+<section id="identidad" class="seccion">
+    <h2 class="seccion-titulo scroll-reveal">Nuestra Identidad</h2>
+    
+    <div class="identidad-grid">
+        <div class="identidad-card scroll-reveal">
+            <h3>Nuestra Historia</h3>
+            <p>En Gustob, creemos que la cocina no es solo el arte de alimentar, sino el poder de evocar memorias que creíamos perdidas. Nuestra historia nace de una fascinación profunda por la Nouvelle Cuisine y la creencia inquebrantable de que "cualquiera puede cocinar", pero solo los intrépidos logran la excelencia.</p>
+        </div>
+
+        <div class="identidad-card scroll-reveal">
+            <h3>La Magia</h3>
+            <p>Ofrecemos platos inspirados en el mundo de Disney, combinando sabores de alta calidad con una experiencia mágica y creativa. Cada plato es una puerta hacia momentos inolvidables, donde la fantasía se materializa en el paladar.</p>
+        </div>
+
+        <div class="identidad-card scroll-reveal">
+            <h3>Nuestra Visión</h3>
+            <p>Brindar momentos únicos a través de comidas temáticas, expandiendo nuestra magia a diferentes ciudades sin perder jamás nuestra calidad característica. Cada experiencia es un viaje, cada sabor es una historia.</p>
+        </div>
+    </div>
+</section>
+
+<!-- MANIFIESTO SECTION -->
+<section id="manifiesto" class="manifiesto">
+    <div class="manifiesto-content">
+        <h2>La Excelencia no es Transportable</h2>
+        <p>Rechazamos el modelo de delivery. Nuestra venta es una experiencia de inmersión sensorial de 360°, donde eliminamos el impacto térmico negativo del transporte para garantizar texturas y aromas óptimos directamente desde el fuego hasta el paladar. En Gustob, la calidad es inquebrantable.</p>
+    </div>
+</section>
+
+<!-- MENÚ SECTION -->
+<section id="menu" class="menu">
+    <h2 class="seccion-titulo scroll-reveal">Nuestra Obra</h2>
+
+    <div class="menu-categoria">
+        <h3>Platos Principales</h3>
+        
+        <div class="plato scroll-reveal">
+            <div class="plato-nombre">Ratatouille Real</div>
+            <div class="plato-precio">$18.500</div>
+            <div class="plato-descripcion">Delicadas láminas de calabacín, berenjena y tomate horneadas a la perfección sobre un espejo de salsa provenzal al óleo de hierbas finas.</div>
+        </div>
+
+        <div class="plato scroll-reveal">
+            <div class="plato-nombre">Trenette al Pesto de Luca</div>
+            <div class="plato-precio">$16.900</div>
+            <div class="plato-descripcion">Pasta larga artesanal perfectamente al dente, bañada en un pesto cremoso de albahaca fresca, piñones tostados y queso pecorino romano, acompañada de papas y ejotes tiernos.</div>
+        </div>
+
+        <div class="plato scroll-reveal">
+            <div class="plato-nombre">Tiana's Gumbo Especial</div>
+            <div class="plato-precio">$21.000</div>
+            <div class="plato-descripcion">Un guiso ancestral, espeso y profundamente aromático, con una base de roux oscuro, mariscos seleccionados, salchicha ahumada y el toque mágico de especias cajún. Servido con arroz blanco.</div>
+        </div>
+
+        <div class="plato scroll-reveal">
+            <div class="plato-nombre">Spaghetti de la Bella y el Vagabundo</div>
+            <div class="plato-precio">$17.500</div>
+            <div class="plato-descripcion">Fideos artesanales bañados en una suntuosa salsa pomodoro casera, coronados con jugosas y gigantes albóndigas de res sazonadas con vino tinto y parmesano curado.</div>
+        </div>
+    </div>
+
+    <div class="menu-categoria">
+        <h3>Postres</h3>
+        
+        <div class="plato scroll-reveal">
+            <div class="plato-nombre">Beignets de la Princesa Tiana</div>
+            <div class="plato-precio">$8.500</div>
+            <div class="plato-descripcion">Esponjosos buñuelos estilo francés, fritos a la perfección dorada, bañados con hilo de miel para abejas y una nube de azúcar glass.</div>
+        </div>
+
+        <div class="plato scroll-reveal">
+            <div class="plato-nombre">Pastel Real de DunBroch - Mamá Elinor</div>
+            <div class="plato-precio">$9.200</div>
+            <div class="plato-descripcion">Tarta gourmet de manzana y especias cálidas, con hojaldre crujiente y relleno suave de frutos del bosque seleccionados.</div>
+        </div>
+
+        <div class="plato scroll-reveal">
+            <div class="plato-nombre">La Manzana Encantada</div>
+            <div class="plato-precio">$10.500</div>
+            <div class="plato-descripcion">Mousse de chocolate blanco y vainilla fina con corazón de compota de manzana canela, moldeado artísticamente como una manzana brillante con un espejo de frutos rojos.</div>
+        </div>
+
+        <div class="plato scroll-reveal">
+            <div class="plato-nombre">Los Bocaditos de los Tres Ositos</div>
+            <div class="plato-precio">$7.900</div>
+            <div class="plato-descripcion">Tres mini pastelitos de chocolate amargo con centro fluido de caramelo salado, decorados con destellos dorados.</div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO / FOOTER -->
+<footer id="contacto">
+    <div class="footer-content">
+        <div class="footer-seccion">
+            <h4>Ubicación</h4>
+            <p>Avenida Vitacura 5460<br>Comuna de Vitacura<br>Región Metropolitana</p>
+        </div>
+        <div class="footer-seccion">
+            <h4>Razón Social</h4>
+            <p>Gustob<br>Pyme de Persona Natural</p>
+        </div>
+        <div class="footer-seccion">
+            <h4>Giro</h4>
+            <p>Restaurantes, cafés y otros establecimientos que expenden comidas y bebidas</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Gustob - Experiencia Gastronómica Exclusiva. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<!-- BOTÓN FLOTANTE WHATSAPP -->
+<a href="https://wa.me/56966352252" class="whatsapp-fab" target="_blank" rel="noopener noreferrer" title="Planifica tu velada por WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+    </svg>
+</a>
+
+<script>
+    // ========== SCROLL REVEAL =========
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal');
+                // Opcional: dejar de observar después de revelar
+                // observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observar todos los elementos con clase scroll-reveal
+    document.querySelectorAll('.scroll-reveal, .identidad-card, .plato').forEach(el => {
+        observer.observe(el);
+    });
+
+    // ========== SUAVE SCROLL =========
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // ========== EFECTOS DE SCROLL ADICIONALES =========
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.style.boxShadow = '0 4px 20px rgba(212, 175, 55, 0.1)';
+        } else {
+            header.style.boxShadow = 'none';
+        }
+    });
+
+    // ========== PARALLAX SUAVE =========
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.style.backgroundPosition = `center, center ${scrolled * 0.5}px`;
+        }
+    });
+</script>
+
+</body>
+</html>
