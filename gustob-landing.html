@@ -76,11 +76,8 @@
         /* ========== HERO SECTION ========== */
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, rgba(11, 11, 11, 0.7) 0%, rgba(11, 11, 11, 0.9) 100%), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" seed="2"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="80"/></filter></defs><rect width="1200" height="800" fill="%23000000" opacity="0.5"/><ellipse cx="600" cy="300" rx="400" ry="300" fill="none" stroke="%23D4AF37" opacity="0.15" stroke-width="2" filter="url(%23noise)"/><path d="M 300 400 Q 600 200 900 400" stroke="%23D4AF37" opacity="0.1" stroke-width="1"/></svg>');
-            background-size: cover, 1200px 800px;
-            background-position: center, center;
-            background-repeat: no-repeat, repeat;
+            background: linear-gradient(135deg, rgba(11, 11, 11, 0.8) 0%, rgba(11, 11, 11, 0.95) 100%), 
+                        url('https://i.imgur.com/t4nM5vk.jpg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -369,6 +366,64 @@
             font-weight: 300;
         }
 
+        /* ========== IMÁGENES PLATOS ========== */
+        .plato-con-imagen {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(26, 26, 26, 0.5);
+            border-radius: 4px;
+            border-left: 3px solid var(--dorado-premium);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .plato-con-imagen.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .plato-con-imagen:hover {
+            background: rgba(26, 26, 26, 0.8);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .plato-imagen {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 2px solid var(--dorado-premium);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+            transition: transform 0.4s ease;
+        }
+
+        .plato-con-imagen:hover .plato-imagen {
+            transform: scale(1.05);
+        }
+
+        .plato-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 768px) {
+            .plato-con-imagen {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .plato-imagen {
+                height: 200px;
+            }
+        }
+
         /* ========== FOOTER ========== */
         footer {
             background: var(--carbón);
@@ -437,7 +492,7 @@
         .whatsapp-fab svg {
             width: 30px;
             height: 30px;
-            fill: var(--blanco-nieve);
+            fill: var(--negro-profundo);
         }
 
         /* ========== RESPONSIVE ========== */
@@ -623,56 +678,80 @@
     <div class="menu-categoria">
         <h3>Platos Principales</h3>
         
-        <div class="plato scroll-reveal">
-            <div class="plato-nombre">Ratatouille Real</div>
-            <div class="plato-precio">$18.500</div>
-            <div class="plato-descripcion">Delicadas láminas de calabacín, berenjena y tomate horneadas a la perfección sobre un espejo de salsa provenzal al óleo de hierbas finas.</div>
+        <div class="plato-con-imagen scroll-reveal">
+            <img src="https://i.imgur.com/t4nM5vk.jpg" alt="Ratatouille Real" class="plato-imagen">
+            <div class="plato-info">
+                <div class="plato-nombre">Ratatouille Real</div>
+                <div class="plato-precio">$18.500</div>
+                <div class="plato-descripcion">Delicadas láminas de calabacín, berenjena y tomate horneadas a la perfección sobre un espejo de salsa provenzal al óleo de hierbas finas.</div>
+            </div>
         </div>
 
-        <div class="plato scroll-reveal">
-            <div class="plato-nombre">Trenette al Pesto de Luca</div>
-            <div class="plato-precio">$16.900</div>
-            <div class="plato-descripcion">Pasta larga artesanal perfectamente al dente, bañada en un pesto cremoso de albahaca fresca, piñones tostados y queso pecorino romano, acompañada de papas y ejotes tiernos.</div>
+        <div class="plato-con-imagen scroll-reveal">
+            <img src="https://i.imgur.com/qE0Vacq.jpg" alt="Trenette al Pesto de Luca" class="plato-imagen">
+            <div class="plato-info">
+                <div class="plato-nombre">Trenette al Pesto de Luca</div>
+                <div class="plato-precio">$16.900</div>
+                <div class="plato-descripcion">Pasta larga artesanal perfectamente al dente, bañada en un pesto cremoso de albahaca fresca, piñones tostados y queso pecorino romano, acompañada de papas y ejotes tiernos.</div>
+            </div>
         </div>
 
-        <div class="plato scroll-reveal">
-            <div class="plato-nombre">Tiana's Gumbo Especial</div>
-            <div class="plato-precio">$21.000</div>
-            <div class="plato-descripcion">Un guiso ancestral, espeso y profundamente aromático, con una base de roux oscuro, mariscos seleccionados, salchicha ahumada y el toque mágico de especias cajún. Servido con arroz blanco.</div>
+        <div class="plato-con-imagen scroll-reveal">
+            <img src="https://i.imgur.com/nvQK57k.jpg" alt="Tiana's Gumbo Especial" class="plato-imagen">
+            <div class="plato-info">
+                <div class="plato-nombre">Tiana's Gumbo Especial</div>
+                <div class="plato-precio">$21.000</div>
+                <div class="plato-descripcion">Un guiso ancestral, espeso y profundamente aromático, con una base de roux oscuro, mariscos seleccionados, salchicha ahumada y el toque mágico de especias cajún. Servido con arroz blanco.</div>
+            </div>
         </div>
 
-        <div class="plato scroll-reveal">
-            <div class="plato-nombre">Spaghetti de la Bella y el Vagabundo</div>
-            <div class="plato-precio">$17.500</div>
-            <div class="plato-descripcion">Fideos artesanales bañados en una suntuosa salsa pomodoro casera, coronados con jugosas y gigantes albóndigas de res sazonadas con vino tinto y parmesano curado.</div>
+        <div class="plato-con-imagen scroll-reveal">
+            <img src="https://i.imgur.com/x5K9V4z.jpg" alt="Spaghetti de la Bella y el Vagabundo" class="plato-imagen">
+            <div class="plato-info">
+                <div class="plato-nombre">Spaghetti de la Bella y el Vagabundo</div>
+                <div class="plato-precio">$17.500</div>
+                <div class="plato-descripcion">Fideos artesanales bañados en una suntuosa salsa pomodoro casera, coronados con jugosas y gigantes albóndigas de res sazonadas con vino tinto y parmesano curado.</div>
+            </div>
         </div>
     </div>
 
     <div class="menu-categoria">
         <h3>Postres</h3>
         
-        <div class="plato scroll-reveal">
-            <div class="plato-nombre">Beignets de la Princesa Tiana</div>
-            <div class="plato-precio">$8.500</div>
-            <div class="plato-descripcion">Esponjosos buñuelos estilo francés, fritos a la perfección dorada, bañados con hilo de miel para abejas y una nube de azúcar glass.</div>
+        <div class="plato-con-imagen scroll-reveal">
+            <img src="https://i.imgur.com/fQeGssv.jpg" alt="Beignets de la Princesa Tiana" class="plato-imagen">
+            <div class="plato-info">
+                <div class="plato-nombre">Beignets de la Princesa Tiana</div>
+                <div class="plato-precio">$8.500</div>
+                <div class="plato-descripcion">Esponjosos buñuelos estilo francés, fritos a la perfección dorada, bañados con hilo de miel para abejas y una nube de azúcar glass.</div>
+            </div>
         </div>
 
-        <div class="plato scroll-reveal">
-            <div class="plato-nombre">Pastel Real de DunBroch - Mamá Elinor</div>
-            <div class="plato-precio">$9.200</div>
-            <div class="plato-descripcion">Tarta gourmet de manzana y especias cálidas, con hojaldre crujiente y relleno suave de frutos del bosque seleccionados.</div>
+        <div class="plato-con-imagen scroll-reveal">
+            <img src="https://i.imgur.com/vxzZz3q.jpg" alt="Pastel Real de DunBroch" class="plato-imagen">
+            <div class="plato-info">
+                <div class="plato-nombre">Pastel Real de DunBroch - Mamá Elinor</div>
+                <div class="plato-precio">$9.200</div>
+                <div class="plato-descripcion">Tarta gourmet de manzana y especias cálidas, con hojaldre crujiente y relleno suave de frutos del bosque seleccionados.</div>
+            </div>
         </div>
 
-        <div class="plato scroll-reveal">
-            <div class="plato-nombre">La Manzana Encantada</div>
-            <div class="plato-precio">$10.500</div>
-            <div class="plato-descripcion">Mousse de chocolate blanco y vainilla fina con corazón de compota de manzana canela, moldeado artísticamente como una manzana brillante con un espejo de frutos rojos.</div>
+        <div class="plato-con-imagen scroll-reveal">
+            <img src="https://i.imgur.com/Fsbv6qC.jpg" alt="La Manzana Encantada" class="plato-imagen">
+            <div class="plato-info">
+                <div class="plato-nombre">La Manzana Encantada</div>
+                <div class="plato-precio">$10.500</div>
+                <div class="plato-descripcion">Mousse de chocolate blanco y vainilla fina con corazón de compota de manzana canela, moldeado artísticamente como una manzana brillante con un espejo de frutos rojos.</div>
+            </div>
         </div>
 
-        <div class="plato scroll-reveal">
-            <div class="plato-nombre">Los Bocaditos de los Tres Ositos</div>
-            <div class="plato-precio">$7.900</div>
-            <div class="plato-descripcion">Tres mini pastelitos de chocolate amargo con centro fluido de caramelo salado, decorados con destellos dorados.</div>
+        <div class="plato-con-imagen scroll-reveal">
+            <img src="https://i.imgur.com/o0TyNOH.jpg" alt="Los Bocaditos de los Tres Ositos" class="plato-imagen">
+            <div class="plato-info">
+                <div class="plato-nombre">Los Bocaditos de los Tres Ositos</div>
+                <div class="plato-precio">$7.900</div>
+                <div class="plato-descripcion">Tres mini pastelitos de chocolate amargo con centro fluido de caramelo salado, decorados con destellos dorados.</div>
+            </div>
         </div>
     </div>
 </section>
@@ -694,7 +773,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2026 Gustob - Experiencia Gastronómica Exclusiva. Todos los derechos reservados.</p>
+        <p>&copy; 2024 Gustob - Experiencia Gastronómica Exclusiva. Todos los derechos reservados.</p>
     </div>
 </footer>
 
